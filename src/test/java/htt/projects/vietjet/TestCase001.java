@@ -10,8 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import static com.codeborne.selenide.Selenide.executeJavaScript;
-import static com.codeborne.selenide.Selenide.refresh;
+import static com.codeborne.selenide.Selenide.*;
 
 public class TestCase001 extends BaseTest {
     private static final org.slf4j.Logger log = LoggerFactory.getLogger(TestCase001.class);
@@ -21,11 +20,16 @@ public class TestCase001 extends BaseTest {
     @Test
     public void vietJetTest() {
         homePage.openHomePage();
-
-        Selenide.sleep(10000);
-        executeJavaScript("localStorage.setItem('cookieConsent', 'true')");
-        refresh();
+        Selenide.sleep(5000);
+//        executeJavaScript("localStorage.setItem('cookieConsent', 'true')");
+//        refresh();
         Assert.assertTrue(homePage.isAcceptCookiePopUpAppear(),"The Cookie Popup doesn't appear");
+        homePage.waitAndAcceptCookie();
+        homePage.clickTypeOfFlight("oneway");
+        Selenide.sleep(5000);
 
+        log.info("This is an INFO log");
+        log.debug("This is a DEBUG log");
+        log.error("This is an ERROR log");
     }
 }

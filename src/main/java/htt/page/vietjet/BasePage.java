@@ -27,7 +27,7 @@ public class BasePage {
     @Step("Navigate to ")
     public void openHomePage (){
         open(Constants.VIETJET_VI);
-        log.info("Navigate to {}", Constants.VIETJET_EN);
+        log.debug("Navigate to {}", Constants.VIETJET_EN);
     }
 
     @Step("Wait And Accept Cookie")
@@ -54,6 +54,6 @@ public class BasePage {
     }
 
     public boolean isAcceptCookiePopUpAppear() {
-        return buttonAcceptCookie.exists();
+        return buttonAcceptCookie.isDisplayed();
     }
 }

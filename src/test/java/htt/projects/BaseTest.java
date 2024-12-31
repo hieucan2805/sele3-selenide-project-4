@@ -5,6 +5,7 @@ import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import com.google.common.collect.ImmutableMap;
+import htt.utils.Constants;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -47,9 +48,11 @@ public class BaseTest {
 		platform = java.util.Optional.ofNullable(platform).orElse("chrome");
 		log.info("Running test on {}", platform);
 
-		DriverFactory.setupDriver("chrome", "local");
+		DriverFactory.setupDriver("edge", "local");
+		Configuration.pageLoadStrategy = "eager"; // Chỉ chờ tải DOM cơ bản
 
 		Configuration.headless = false;
+		Configuration.baseUrl = Constants.VIETJET_VI;
 		SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(true));
 		log.info("Start {} TestNG testcases in {}", getClass().getName(), Configuration.browser);
 
