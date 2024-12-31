@@ -6,9 +6,9 @@ Selenium 3 output (2024-12-29):
 - Parallel/distributed testing - not implemented yet
 - Cross browsers testing: Chrome, Edge - DONE
 - Selenium Grid/Shard
-Test cases: Vietjet - Implementing
-CI: Schedule test, send email notification result with summary - not implemented yet
-User cases - Implementing
+- Test cases: Vietjet - Implementing
+- CI: Schedule test, send email notification result with summary - not implemented yet
+- User cases - Implementing
 
 Content testing
 - Multiple languages testing
