@@ -8,20 +8,34 @@ import static com.codeborne.selenide.Selenide.$x;
 public class HomePage extends BasePage{
     private final String radioReturnFlight = "//img[@src='/static/media/switch.d8860013.svg']/parent::div/preceding-sibling::div//input[@type='radio'and@value='roundTrip']";
     private final String radioOneWayFlight = "//img[@src='/static/media/switch.d8860013.svg']/parent::div/preceding-sibling::div//input[@type='radio'and@value='oneway']";
+    private final String typeOfFlight = "//img[@src='/static/media/switch.d8860013.svg']/parent::div/preceding-sibling::div//input[@type='radio'and@value='%s']";
     private final String inputFrom = "//input[@class='MuiInputBase-input MuiOutlinedInput-input' and not(@id)]";
     private final String buttonDepartureDate = "";
     private final String inputDestination = "//input[@class='MuiInputBase-input MuiOutlinedInput-input' and @id]";
     private final String buttonReturnDate = "//img[@src='/static/media/switch.d8860013.svg']/following-sibling::div/following-sibling::div//p";
-    private final String typeOfFlight = "//img[@src='/static/media/switch.d8860013.svg']/parent::div/preceding-sibling::div//input[@type='radio'and@value='%s']";
     private final String dropdownPassenger = "//input[starts-with(@id,'input-base-custom-')]";
     private final String buttonSearchFlight = "//img[@src='/static/media/switch.d8860013.svg']/parent::div/following-sibling::div//button/span[@class='MuiButton-label']";
 
-
+    //Actions block
     @Step("Select Type of Flight")
     public void clickTypeOfFlight(String type){
-//        $x(String.format(typeOfFlight,type)).click();
+        $x(String.format(typeOfFlight,type)).click();
+    }
+
+    @Step("Select the One Way Flight")
+    public void selectOneWayFlight(){
         $x(radioOneWayFlight).click();
     }
 
+    @Step("Select the Return Flight")
+    public void selectReturnFlight(){
+        $x(radioReturnFlight).click();
+    }
+
+    @Step("Input the From Location")
+    public void inputFromLocation(String location){
+        $x(inputFrom).click();
+        $x(inputFrom).setValue(location);
+    }
 
 }

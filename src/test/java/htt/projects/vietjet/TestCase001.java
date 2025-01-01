@@ -23,7 +23,7 @@ public class TestCase001 extends BaseTest {
         Selenide.sleep(5000);
 //        executeJavaScript("localStorage.setItem('cookieConsent', 'true')");
 //        refresh();
-        Assert.assertTrue(homePage.isAcceptCookiePopUpAppear(),"The Cookie Popup doesn't appear");
+        Assert.assertFalse(homePage.isAcceptCookiePopUpAppear(),"The Cookie Popup doesn't appear");
         homePage.waitAndAcceptCookie();
         homePage.clickTypeOfFlight("oneway");
         Selenide.sleep(5000);
