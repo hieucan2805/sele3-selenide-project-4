@@ -1,0 +1,35 @@
+{
+  "homePage": {
+    "button": {
+      "findFlight": "Tìm chuyến bay",
+      "departureDate": "Ngày đi",
+      "returnDate": "Ngày về",
+      "passenger": "Hành khách"
+    },
+    "radio": {
+      "oneWay": "Một chiều",
+      "roundTrip": "Khứ hồi"
+    },
+    "text": {
+      "currency": "VND"
+    },
+    "input": {
+      "from": "Điểm khởi hành",
+      "to": "Điểm đến"
+    },
+    "month": {
+      "Jan": "Tháng 01",
+      "Feb": "Tháng 02",
+      "Mar": "Tháng 03",
+      "Apr": "Tháng 04",
+      "May": "Tháng 05",
+      "Jun": "Tháng 06",
+      "Jul": "Tháng 07",
+      "Aug": "Tháng 08",
+      "Sep": "Tháng 09",
+      "Oct": "Tháng 10",
+      "Nov": "Tháng 11",
+      "Dec": "Tháng 12"
+    }
+  }
+}
