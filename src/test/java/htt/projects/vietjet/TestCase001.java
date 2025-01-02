@@ -20,16 +20,18 @@ public class TestCase001 extends BaseTest {
     @Test
     public void vietJetTest() {
         homePage.openHomePage();
-        Selenide.sleep(5000);
-//        executeJavaScript("localStorage.setItem('cookieConsent', 'true')");
-//        refresh();
-        Assert.assertFalse(homePage.isAcceptCookiePopUpAppear(),"The Cookie Popup doesn't appear");
-        homePage.waitAndAcceptCookie();
-        homePage.clickTypeOfFlight("oneway");
-        Selenide.sleep(5000);
+        homePage.acceptCookie();
+        homePage.clickTypeOfFlight("roundTrip");
+        homePage.inputFromLocation("SGN");
+        homePage.clickOptionAirportName("SGN");
+        homePage.inputDestinationLocation("HAN");
+        homePage.clickOptionAirportName("HAN");
 
-        log.info("This is an INFO log");
-        log.debug("This is a DEBUG log");
-        log.error("This is an ERROR log");
+        homePage.clickDepartureDateCalendar();
+        homePage.selectDateInCalendar("January 2025", "6");
+        homePage.selectDateInCalendar("January 2025", "11");
+
+
+        Selenide.sleep(5000);
     }
 }

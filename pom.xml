@@ -185,7 +185,7 @@
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectjweaver.version}/aspectjweaver-${aspectjweaver.version}.jar"
                     </argLine>
                     <suiteXmlFiles>
-                        <suiteXmlFile>src/test/resources/suites/suiteAll.xml</suiteXmlFile>
+                        <suiteXmlFile>src/test/resources/suites/test.xml</suiteXmlFile>
                     </suiteXmlFiles>
                     <forkCount>1</forkCount> <!-- Number of parallel test runs -->
                     <reuseForks>true</reuseForks>

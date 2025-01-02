@@ -12,8 +12,7 @@ import org.slf4j.LoggerFactory;
 import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.$x;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 
 public class BasePage {
     private static final org.slf4j.Logger log = LoggerFactory.getLogger(BasePage.class);
@@ -25,18 +24,18 @@ public class BasePage {
     }
 
     @Step("Navigate to ")
-    public void openHomePage (){
-        open(Constants.VIETJET_VI);
+    public void openHomePage() {
+        open(Constants.VIETJET_EN);
         log.debug("Navigate to {}", Constants.VIETJET_EN);
     }
 
     @Step("Wait And Accept Cookie")
-    public void waitAndAcceptCookie() {
-        if (isAcceptCookiePopUpAppear()) {
-            log.info("Cookie pop-up appears");
-            waitForVisible(buttonAcceptCookie);
-            buttonAcceptCookie.click();
-        }
+    public void acceptCookie() {
+        buttonAcceptCookie.shouldBe(visible, Duration.ofSeconds(5));
+//        if (buttonAcceptCookie.isDisplayed()) {
+        log.info("Cookie pop-up appears");
+        buttonAcceptCookie.shouldBe(visible).click();
+//        }
     }
 
     protected boolean isElementsBlocked(SelenideElement element) {
@@ -51,9 +50,5 @@ public class BasePage {
             }
         }
         return true;
-    }
-
-    public boolean isAcceptCookiePopUpAppear() {
-        return buttonAcceptCookie.isDisplayed();
     }
 }
