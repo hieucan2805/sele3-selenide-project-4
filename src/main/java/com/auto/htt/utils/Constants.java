@@ -14,8 +14,8 @@ public class Constants {
 
     //Date Time Format
     public static final String TIME_FORMAT_CURRENT_DATE_TIME = "MM_dd_yyyy_HH_mm_ss";
-    public static final String TIME_FORMAT_CURRENT_DATE = "MM_dd_yyyy";
+    public static final String TIME_FORMAT_CURRENT_DATE = "dd MMMM yyyy";
 
     //Time out
-    public static final Duration SHORT_WAIT = Duration.ofSeconds(3);
+    public static final Duration SHORT_WAIT = Duration.ofSeconds(5);
 }

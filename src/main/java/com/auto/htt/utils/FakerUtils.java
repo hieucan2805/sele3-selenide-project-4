@@ -53,6 +53,26 @@ public class FakerUtils {
         return LocalDate.now();
     }
 
+    public static String getFormatedCurrentDate() {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern(Constants.TIME_FORMAT_CURRENT_DATE);
+        LocalDate now = LocalDate.now();
+        return dtf.format(now);
+    }
+
+    public static String getDate(Object date) {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern(Constants.TIME_FORMAT_CURRENT_DATE);
+        LocalDate tempDate;
+
+        if (date.equals("tomorrow")) {
+            tempDate = getCurrentDate().plusDays(1);
+        } else if (date.equals("yesterday")) {
+            tempDate = getCurrentDate().minusDays(1);
+        } else {
+            tempDate = getCurrentDate().plusDays((int) date);
+        }
+        return dtf.format(tempDate);
+    }
+
     public static String getCurrentDateTime() {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern(Constants.TIME_FORMAT_CURRENT_DATE_TIME);
         LocalDateTime now = LocalDateTime.now();

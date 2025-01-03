@@ -1,5 +1,6 @@
 package com.auto.htt.page.vietjet;
 
+import com.auto.htt.utils.Constants;
 import io.qameta.allure.Step;
 import org.slf4j.LoggerFactory;
 
@@ -63,13 +64,13 @@ public class HomePage extends BasePage {
 
     public void clickOptionAirportName(String destination) {
         String formatedOptionAirportName = String.format(optionAirportName, destination);
-        $x(formatedOptionAirportName).shouldBe(visible, Duration.ofSeconds(5));
+        $x(formatedOptionAirportName).shouldBe(visible, Constants.SHORT_WAIT);
         $x(formatedOptionAirportName).click();
     }
 
     public void clickDepartureDateCalendar() {
-        $x(buttonDepartureDate).shouldBe(visible, Duration.ofSeconds(5));
-            $x(panelCalendar).shouldBe(visible,Duration.ofSeconds(5));
+        $x(buttonDepartureDate).shouldBe(visible, Constants.SHORT_WAIT);
+            $x(panelCalendar).shouldBe(visible,Constants.SHORT_WAIT);
 
     }
 
@@ -77,7 +78,7 @@ public class HomePage extends BasePage {
         $x(panelCalendar).shouldBe(visible,Duration.ofSeconds(10));
         String strMonthYear = month + " " + year;
         String departureDate = String.format(buttonDateAtCalendar, strMonthYear, date);
-        $x(departureDate).shouldBe(visible, Duration.ofSeconds(5));
+        $x(departureDate).shouldBe(visible, Constants.SHORT_WAIT);
         $x(departureDate).click();
     }
 
@@ -91,7 +92,7 @@ public class HomePage extends BasePage {
 
 
     public void clickReturnDateCale() {
-        $x(buttonReturnDate).shouldBe(visible, Duration.ofSeconds(5));
+        $x(buttonReturnDate).shouldBe(visible, Constants.SHORT_WAIT);
         $x(buttonReturnDate).click();
     }
 

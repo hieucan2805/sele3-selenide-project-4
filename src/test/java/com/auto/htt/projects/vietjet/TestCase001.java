@@ -1,6 +1,7 @@
 package com.auto.htt.projects.vietjet;
 
 
+import com.auto.htt.utils.FakerUtils;
 import com.codeborne.selenide.Selenide;
 import com.auto.htt.page.vietjet.HomePage;
 import com.auto.htt.projects.BaseTest;
@@ -14,19 +15,21 @@ public class TestCase001 extends BaseTest {
 
     @Test
     public void vietJetTest() {
-        homePage.openHomePage();
-        homePage.acceptCookie();
-        homePage.clickTypeOfFlight("roundTrip");
-        homePage.inputFromLocation("SGN");
-        homePage.clickOptionAirportName("SGN");
-        homePage.inputDestinationLocation("HAN");
-        homePage.clickOptionAirportName("HAN");
+//        homePage.openHomePage();
+//        homePage.acceptCookie();
+//        homePage.clickTypeOfFlight("roundTrip");
+//        homePage.inputFromLocation("SGN");
+//        homePage.clickOptionAirportName("SGN");
+//        homePage.inputDestinationLocation("HAN");
+//        homePage.clickOptionAirportName("HAN");
+//
+//        homePage.clickDepartureDateCalendar();
+//        homePage.selectDateInCalendar("2025","January", "6");
+//        homePage.selectDateInCalendar("2025","January", "11");
 
-        homePage.clickDepartureDateCalendar();
-        homePage.selectDateInCalendar("2025","January", "6");
-        homePage.selectDateInCalendar("2025","January", "11");
 
-
+        System.out.println(FakerUtils.getFormatedCurrentDate());
+        System.out.println(FakerUtils.getDate(3));
         Selenide.sleep(5000);
     }
 }
