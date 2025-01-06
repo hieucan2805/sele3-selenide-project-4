@@ -1,20 +1,17 @@
 {
-  "HOCHIMINH_CITY": {
+  "SGN": {
     "vi": "Thành phố Hồ Chí Minh",
     "en": "Ho Chi Minh city",
-    "airport_name":"Tân Sơn Nhất",
-    "code": "SGN"
+    "airport_name":"Tân Sơn Nhất"
   },
-  "HANOI": {
+  "HAN": {
     "vi": "Hà Nội",
     "en": "Hanoi",
-    "airport_name":"Nội Bài",
-    "code": "HAN"
+    "airport_name":"Nội Bài"
   },
-  "DANANG_CITY": {
+  "DAD": {
     "vi": "Đà Nẵng",
     "en": "Danang",
-    "airport_name":"Danang Airport",
-    "code": "DAD"
+    "airport_name":"Danang Airport"
   }
 }

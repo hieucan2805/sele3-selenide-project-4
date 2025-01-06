@@ -1,10 +1,10 @@
 {
-  "SGN_HAN_TOMORROW_3DAYS_2ADULTS": {
+  "TC001": {
     "from": "Thành phố Hồ Chí Minh",
     "to": "Hà Nội",
     "type": "Round trip",
     "departure_date": "tomorrow",
-    "return_date": "next 3 days",
+    "duration": 3,
     "passenger": {
       "adults": 2,
       "child": 0,
