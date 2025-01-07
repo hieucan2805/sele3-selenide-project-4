@@ -15,8 +15,8 @@ public class TestCase001 extends BaseTest {
 
     @Test
     public void vietJetTest() {
-//        homePage.openHomePage();
-//        homePage.acceptCookie();
+        homePage.openHomePage();
+        homePage.acceptCookie();
 //        homePage.clickTypeOfFlight("roundTrip");
 //        homePage.inputFromLocation("SGN");
 //        homePage.clickOptionAirportName("SGN");
@@ -28,8 +28,8 @@ public class TestCase001 extends BaseTest {
 //        homePage.selectDateInCalendar("2025","January", "11");
 
 
-        System.out.println(FakerUtils.getFormatedCurrentDate());
-        System.out.println(FakerUtils.getDate(3));
-        Selenide.sleep(5000);
+//        System.out.println(FakerUtils.getFormatedCurrentDate());
+//        System.out.println(FakerUtils.getDate(3));
+//        Selenide.sleep(5000);
     }
 }

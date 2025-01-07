@@ -16,10 +16,6 @@ public class PassengerModel {
 
     @Override
     public String toString() {
-        return "Passenger{" +
-                "adults=" + adults +
-                ", child=" + child +
-                ", baby=" + baby +
-                '}';
+        return STR."Passenger{adults=\{adults}, child=\{child}, baby=\{baby}}";
     }
 }

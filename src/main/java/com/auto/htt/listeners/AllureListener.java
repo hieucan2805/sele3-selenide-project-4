@@ -5,14 +5,14 @@ import io.qameta.allure.Allure;
 import io.qameta.allure.listener.TestLifecycleListener;
 import io.qameta.allure.model.Status;
 import io.qameta.allure.model.TestResult;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.OutputType;
-import org.slf4j.LoggerFactory;
 
 import java.io.ByteArrayInputStream;
 import java.util.UUID;
 
+@Log4j2
 public class AllureListener implements TestLifecycleListener {
-    private static final org.slf4j.Logger log = LoggerFactory.getLogger(AllureListener.class);
 
     @Override
     public void beforeTestSchedule(TestResult result) {
@@ -40,11 +40,6 @@ public class AllureListener implements TestLifecycleListener {
 
     @Override
     public void beforeTestStop(TestResult result) {
-//		if (result.getStatus().equals(Status.FAILED)) {
-//			if (WebDriverRunner.hasWebDriverStarted()) {
-//				Allure.addAttachment(result.getName() + "_Failed_Screenshot", new ByteArrayInputStream(Objects.requireNonNull(Selenide.screenshot(OutputType.BYTES))));
-//			}
-//		}
         if (result.getStatus() != null &&
                 (result.getStatus().equals(Status.BROKEN) || result.getStatus().equals(Status.FAILED))) {
             log.info("Test case \"{}\" has been \"{}\". Take a screenshot", result.getFullName(),
@@ -63,7 +58,6 @@ public class AllureListener implements TestLifecycleListener {
 
     @Override
     public void afterTestStop(TestResult result) {
-
     }
 
     @Override

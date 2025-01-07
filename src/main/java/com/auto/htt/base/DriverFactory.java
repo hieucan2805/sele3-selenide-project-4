@@ -1,56 +1,21 @@
 package com.auto.htt.base;
 
 import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.WebDriverRunner;
-import org.openqa.selenium.MutableCapabilities;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.edge.EdgeOptions;
-import org.openqa.selenium.remote.RemoteWebDriver;
-import com.auto.htt.utils.PropertiesUtils;
-
-import java.net.MalformedURLException;
-import java.net.URL;
+import com.codeborne.selenide.PropertiesReader;
 
 public class DriverFactory {
 
-	public static void setupDriver(String browser, String mode) throws MalformedURLException {
-		if ("grid".equalsIgnoreCase(mode)) {
-			RemoteWebDriver driver = getRemoteWebDriver(browser);
-			WebDriverRunner.setWebDriver(driver);
-		} else {
-			switch (browser.toLowerCase()) {
-				case "chrome":
-					Configuration.browser = "chrome";
-					break;
-				case "firefox":
-					Configuration.browser = "firefox";
-					break;
-				case "edge":
-					Configuration.browser = "edge";
-					break;
-				default:
-					Configuration.browser = "chrome";
-					throw new IllegalArgumentException("Unsupported browser: " + browser);
+    public static void setupDriver() {
+        PropertiesReader properties = new PropertiesReader("properties/selenide.properties");
 
-			}
-		}
+        // Load properties vào Configuration
+        Configuration.browser = properties.getProperty("browser", null);
+        Configuration.browserSize = properties.getProperty("browserSize", "1920x1080");
+        Configuration.timeout = Long.parseLong(properties.getProperty("timeout", "10000"));
+        Configuration.baseUrl = properties.getProperty("baseUrl", null);
+        Configuration.headless = Boolean.parseBoolean(properties.getProperty("headless", "false"));
+        Configuration.pageLoadStrategy = properties.getProperty("pageLoadStrategy", "none");
 
-	}
+    }
 
-	private static RemoteWebDriver getRemoteWebDriver(String browser) throws MalformedURLException {
-		URL gridUrl = new URL(PropertiesUtils.getValue("GRID_URL")); // URL of Selenium Grid
-
-		MutableCapabilities options;
-
-		if (browser.equalsIgnoreCase("chrome")) {
-			options = new ChromeOptions();
-		} else if (browser.equalsIgnoreCase("edge")) {
-			options = new EdgeOptions();
-		} else {
-			throw new IllegalArgumentException("Invalid browser: " + browser);
-		}
-
-		return new RemoteWebDriver(gridUrl, options);
-
-	}
 }

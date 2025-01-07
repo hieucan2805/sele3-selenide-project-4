@@ -20,7 +20,7 @@ public class BasePage {
         element.shouldBe(visible, Duration.ofSeconds(10));
     }
 
-    @Step("Navigate to ")
+    @Step("Navigate to Homepage")
     public void openHomePage() {
         open(Constants.VIETJET_EN);
         log.debug("Navigate to {}", Constants.VIETJET_EN);
