@@ -11,7 +11,6 @@ import org.slf4j.LoggerFactory;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 
-import java.io.IOException;
 
 import static java.lang.invoke.MethodHandles.lookup;
 

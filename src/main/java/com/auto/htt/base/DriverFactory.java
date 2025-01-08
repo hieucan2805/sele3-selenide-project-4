@@ -2,7 +2,9 @@ package com.auto.htt.base;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.PropertiesReader;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class DriverFactory {
 
     public static void setupDriver() {
@@ -14,8 +16,7 @@ public class DriverFactory {
         Configuration.timeout = Long.parseLong(properties.getProperty("timeout", "10000"));
         Configuration.baseUrl = properties.getProperty("baseUrl", null);
         Configuration.headless = Boolean.parseBoolean(properties.getProperty("headless", "false"));
-        Configuration.pageLoadStrategy = properties.getProperty("pageLoadStrategy", "none");
-
+        Configuration.pageLoadStrategy = properties.getProperty("pageLoadStrategy", "normal");
     }
 
 }
