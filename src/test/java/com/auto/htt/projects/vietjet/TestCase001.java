@@ -15,8 +15,8 @@ public class TestCase001 extends BaseTest {
 
     @Test
     public void vietJetTest() {
-        homePage.openHomePage();
-        homePage.acceptCookie();
+//        homePage.openHomePage();
+//        homePage.acceptCookie();
 //        homePage.clickTypeOfFlight("roundTrip");
 //        homePage.inputFromLocation("SGN");
 //        homePage.clickOptionAirportName("SGN");
