@@ -1,19 +1,56 @@
-Selenium 3 output (2024-12-29):
+# Selenide Project
+This project is built using Maven and designed to run automated UI tests using Selenide. It includes dependencies for logging, reporting, and test execution with TestNG, Allure, and SLF4J.
 
-- Selenide FW (https://selenide.org/): automation FW, test FW - DONE
-- Reports: HTML, Allure Report, Report Portal - not implemented yet
-- Test retry: test failed - not implemented yet
-- Parallel/distributed testing - not implemented yet
-- Cross browsers testing: Chrome, Edge - DONE
-- Selenium Grid/Shard
-- Test cases: Vietjet - Implementing
-- CI: Schedule test, send email notification result with summary - not implemented yet
-- User cases - Implementing
+## Table of Contents
+1. [Features](#features)
+2. [Requirements](#requirements)
+3. [Project Structure](#project-structure)
+4. [Set up](#setup-installation)
+5. [Run Test](#run-tests)
+6. [Reports](#report)
+7. [Notes](#notes)
+8. [References](#references)
 
-Content testing
-- Multiple languages testing
-- Group tests by purposes: regression, smoke/sanity test
-- Source control practice:
-- Switch test environment: dev, stg (dev: agoda.com, stg: vj.com) - not implemented yet
-- Compare with another FW e.g. Playwright - not implemented yet
-- Wrap custom controls - Implementing
+## Features
+| Feature                                     | Status                                           | Note                                 |
+|---------------------------------------------|--------------------------------------------------|--------------------------------------|
+| Selenide FW                                 | <span style="color: green;">Implemented</span>   | JAVA 21, Selenide 7.6.1              |
+| Reports with HTML, Allure and Report Portal | <span style="color: green;">Implemented</span>   | Report Portal is not implemented yet |
+| Test retry                                  | <span style="color: green;">Implemented</span>   |                                      |
+| Parallel/distributed testing                | <span style="color: red;">Not Implemented</span> |                                      |
+| Cross browsers testing                      | <span style="color: green;">Implemented</span>   | Microsoft Edge, Google Chorme        |
+| Selenium Grid/Shard                         | <span style="color: red;">Not Implemented</span> |                                      |
+| CI                                          | <span style="color: red;">Not Implemented</span> |                                      |
+| Content testing                             | <span style="color: red;">Not Implemented</span> |                                      |
+| Multiple languages testing                  | <span style="color: cyan;">In - Progress</span>  |                                      |
+| Group tests by purposes                     | <span style="color: red;">Not Implemented</span> |                                      |
+| Source control practice                     | <span style="color: red;">Not Implemented</span> |                                      |
+| Switch test environment                     | <span style="color: red;">Not Implemented</span> |                                      |
+| Wrap custom controls                        | <span style="color: red;">Not Implemented</span> |                                      |
+
+## Requirements
+ - Java 21: Ensure that you have JDK 21 installed.
+ - Maven: This project uses Maven for dependency management and build automation.
+
+## Project Structure
+
+### Dependencies
+
+### Plugins
+
+### Build Plugins
+
+### Reporting Plugins
+
+## Setup, Installation
+
+## Run Tests
+
+## Report
+
+## Notes
+
+## References
+
+
+

@@ -3,21 +3,13 @@ package com.auto.htt.page.vietjet.enums;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-@AllArgsConstructor
 @Getter
+@AllArgsConstructor
 public enum TypeFlight {
 
-    ROUND_TRIP("Round Trip","Khứ hồi"),
-    ONE_WAY("One Way", "Một chiều");
+    ROUND_TRIP("radio.roundTrip"),
+    ONE_WAY("radio.oneWay");
 
-    private final String viName;
-    private final String enName;
+    private final String key;
 
-    public String getVietnameseName() {
-        return viName;
-    }
-
-    public String getEnglishName() {
-        return enName;
-    }
 }

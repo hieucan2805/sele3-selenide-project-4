@@ -1,5 +1,6 @@
 package com.auto.htt.listeners;
 
+
 import com.codeborne.selenide.Selenide;
 import io.qameta.allure.Allure;
 import io.qameta.allure.listener.TestLifecycleListener;
@@ -45,9 +46,9 @@ public class AllureListener implements TestLifecycleListener {
             log.info("Test case \"{}\" has been \"{}\". Take a screenshot", result.getFullName(),
                     result.getStatus().value());
             try {
-                byte[] buf = Selenide.screenshot(OutputType.BYTES);
-                if (buf != null) {
-                    ByteArrayInputStream input = new ByteArrayInputStream(buf);
+                byte[] screenshot = Selenide.screenshot(OutputType.BYTES);
+                if (screenshot != null) {
+                    ByteArrayInputStream input = new ByteArrayInputStream(screenshot);
                     Allure.attachment(UUID.randomUUID().toString(), input);
                 }
             } catch (Exception e) {

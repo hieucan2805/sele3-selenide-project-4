@@ -1,21 +1,23 @@
 package com.auto.htt.page.vietjet;
 
+import com.auto.htt.page.vietjet.enums.TypeFlight;
 import com.auto.htt.utils.Constants;
+import com.auto.htt.utils.LanguageHelper;
+import com.auto.htt.utils.LocatorHelper;
 import io.qameta.allure.Step;
-import org.slf4j.LoggerFactory;
 
 import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
-import static com.codeborne.selenide.Selenide.sleep;
 
 public class HomePage extends BasePage {
-    private static final org.slf4j.Logger log = LoggerFactory.getLogger(HomePage.class);
+    private final String language = LanguageHelper.getLanguage();
+
 
     private final String radioReturnFlight = "//img[@src='/static/media/switch.d8860013.svg']/parent::div/preceding-sibling::div//input[@type='radio'and@value='roundTrip']";
     private final String radioOneWayFlight = "//img[@src='/static/media/switch.d8860013.svg']/parent::div/preceding-sibling::div//input[@type='radio'and@value='oneway']";
-    private final String typeOfFlight = "//img[@src='/static/media/switch.d8860013.svg']/parent::div/preceding-sibling::div//input[@type='radio'and@value='%s']";
+    private final String typeOfFlight = "//span[text()='%s']";
     private final String inputFrom = "//input[@class='MuiInputBase-input MuiOutlinedInput-input' and not(@id)]";
     private final String buttonDepartureDate = "//input[@class='MuiInputBase-input MuiOutlinedInput-input' and not(@id='arrivalPlaceDesktop')]//ancestor::div[.//div[@role='button']]/div[@role='button']";
     private final String inputDestination = "//input[@class='MuiInputBase-input MuiOutlinedInput-input' and @id]";
@@ -36,8 +38,10 @@ public class HomePage extends BasePage {
 
     //Actions block
     @Step("Select Type of Flight")
-    public void clickTypeOfFlight(String type) {
-        $x(String.format(typeOfFlight, type)).click();
+    public void clickTypeOfFlight(TypeFlight type) {
+    String a =    LocatorHelper.updateLocatorWithDynamicText(typeOfFlight, language,type.getKey());
+
+        $x(a).click();
     }
 
     @Step("Select the One Way Flight")
@@ -56,7 +60,12 @@ public class HomePage extends BasePage {
         $x(inputFrom).setValue(location);
     }
 
-    @Step("Input the Destination Location")
+    @Step("Select the Destination Location")
+    public void selectDestinationAirport(String location){
+        inputDestinationLocation(location);
+        clickOptionAirportName(location);
+    }
+
     public void inputDestinationLocation(String location) {
         $x(inputDestination).click();
         $x(inputDestination).setValue(location);
