@@ -29,7 +29,7 @@ This project is built using Maven and designed to run automated UI tests using S
 | Wrap custom controls                        | <span style="color: red;">Not Implemented</span> |                                      |
 
 ## Requirements
- - Java 21: Ensure that you have JDK 17+ installed.
+ - Java 21: Ensure that you have JDK 21 installed.
  - Maven: This project uses Maven for dependency management and build automation.
 
 ## Project Structure

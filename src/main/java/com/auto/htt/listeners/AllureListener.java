@@ -1,11 +1,16 @@
 package com.auto.htt.listeners;
 
-import com.auto.htt.utils.ScreenshotUtils;
 
+import com.codeborne.selenide.Selenide;
+import io.qameta.allure.Allure;
 import io.qameta.allure.listener.TestLifecycleListener;
 import io.qameta.allure.model.Status;
 import io.qameta.allure.model.TestResult;
 import lombok.extern.log4j.Log4j2;
+import org.openqa.selenium.OutputType;
+
+import java.io.ByteArrayInputStream;
+import java.util.UUID;
 
 @Log4j2
 public class AllureListener implements TestLifecycleListener {
@@ -41,7 +46,11 @@ public class AllureListener implements TestLifecycleListener {
             log.info("Test case \"{}\" has been \"{}\". Take a screenshot", result.getFullName(),
                     result.getStatus().value());
             try {
-                ScreenshotUtils.attachScreenshot(result.getFullName());
+                byte[] screenshot = Selenide.screenshot(OutputType.BYTES);
+                if (screenshot != null) {
+                    ByteArrayInputStream input = new ByteArrayInputStream(screenshot);
+                    Allure.attachment(UUID.randomUUID().toString(), input);
+                }
             } catch (Exception e) {
                 log.error("An error occurs when adding screenshot to report: \n{}", e.getMessage());
             }

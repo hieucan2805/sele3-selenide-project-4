@@ -1,6 +1,5 @@
 package com.auto.htt.utils;
 
-import com.google.gson.JsonObject;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -12,7 +11,7 @@ public class LocatorHelper {
     // Initialize by loading the localization files
     static {
         enBundle = ResourceBundle.getBundle("localization.homepage.text", Locale.ENGLISH);
-        viBundle = ResourceBundle.getBundle("localization.homepage.text", new Locale("vi"));
+        viBundle = ResourceBundle.getBundle("localization.homepage.text", Locale.forLanguageTag("vi-VN"));
     }
 
     /**
