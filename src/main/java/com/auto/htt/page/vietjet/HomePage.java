@@ -2,6 +2,7 @@ package com.auto.htt.page.vietjet;
 
 import com.auto.htt.page.vietjet.enums.TypeFlight;
 import com.auto.htt.utils.Constants;
+import com.auto.htt.utils.FakerUtils;
 import com.auto.htt.utils.LanguageHelper;
 import com.auto.htt.utils.LocatorHelper;
 import io.qameta.allure.Step;
@@ -39,7 +40,7 @@ public class HomePage extends BasePage {
     //Actions block
     @Step("Select Type of Flight")
     public void clickTypeOfFlight(TypeFlight type) {
-    String a =    LocatorHelper.updateLocatorWithDynamicText(typeOfFlight, language,type.getKey());
+    String a =    LocatorHelper.updateLocatorWithDynamicText(typeOfFlight,type.getKey());
 
         $x(a).click();
     }
@@ -85,20 +86,20 @@ public class HomePage extends BasePage {
 
     public void selectDateInCalendar(String year, String month, String date) {
         $x(panelCalendar).shouldBe(visible,Duration.ofSeconds(10));
-        String strMonthYear = month + " " + year;
+        String strMonthYear = STR."\{month} \{year}";
         String departureDate = String.format(buttonDateAtCalendar, strMonthYear, date);
         $x(departureDate).shouldBe(visible, Constants.SHORT_WAIT);
         $x(departureDate).click();
     }
 
-    public void selectDateInCalendar(String date) {
+    public void selectDateInCalendar(Object date) {
+//        $x(panelCalendar).shouldBe(visible,Duration.ofSeconds(10));
+
+        String tmp_date = FakerUtils.getDate(date);
+
+        System.out.println(tmp_date);
 
     }
-
-    public void changeTheCalendar(String month){
-
-    }
-
 
     public void clickReturnDateCale() {
         $x(buttonReturnDate).shouldBe(visible, Constants.SHORT_WAIT);
