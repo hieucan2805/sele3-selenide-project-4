@@ -15,6 +15,7 @@ import static com.codeborne.selenide.Selenide.$x;
 public class HomePage extends BasePage {
     private final String language = LanguageHelper.getLanguage();
 
+    private final LocatorHelper localeBundle = new LocatorHelper(HomePage.class.getSimpleName());
 
     private final String radioReturnFlight = "//img[@src='/static/media/switch.d8860013.svg']/parent::div/preceding-sibling::div//input[@type='radio'and@value='roundTrip']";
     private final String radioOneWayFlight = "//img[@src='/static/media/switch.d8860013.svg']/parent::div/preceding-sibling::div//input[@type='radio'and@value='oneway']";
@@ -40,7 +41,7 @@ public class HomePage extends BasePage {
     //Actions block
     @Step("Select Type of Flight")
     public void clickTypeOfFlight(TypeFlight type) {
-    String a =    LocatorHelper.updateLocatorWithDynamicText(typeOfFlight,type.getKey());
+    String a =    localeBundle.updateLocatorWithDynamicText(typeOfFlight,type.getKey());
 
         $x(a).click();
     }
@@ -106,5 +107,8 @@ public class HomePage extends BasePage {
         $x(buttonReturnDate).click();
     }
 
+    public LocatorHelper getLocaleBundle(){
+        return localeBundle ;
+    }
 
 }
