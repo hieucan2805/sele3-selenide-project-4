@@ -9,7 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 public class DriverFactory {
 
     public static void setupDriver() {
-        PropertiesReader properties = new PropertiesReader("properties/selenide.properties");
+        PropertiesReader properties = new PropertiesReader("selenide.properties");
 
 
         log.info("Load properties to Configuration ");

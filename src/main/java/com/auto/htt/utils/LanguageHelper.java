@@ -1,11 +1,13 @@
 package com.auto.htt.utils;
 
 import com.codeborne.selenide.PropertiesReader;
+import lombok.extern.slf4j.Slf4j;
 
 
+@Slf4j
 public class LanguageHelper {
 
-    static PropertiesReader properties = new PropertiesReader("properties/selenide.properties");
+    static PropertiesReader properties = new PropertiesReader("selenide.properties");
 
     public static String getLanguage() {
         return properties.getProperty("language", "en");
