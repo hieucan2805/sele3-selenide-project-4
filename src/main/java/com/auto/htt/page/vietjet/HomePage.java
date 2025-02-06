@@ -6,6 +6,7 @@ import com.auto.htt.utils.FakerUtils;
 import com.auto.htt.utils.LanguageHelper;
 import com.auto.htt.utils.LocatorHelper;
 import io.qameta.allure.Step;
+import lombok.Getter;
 
 import java.time.Duration;
 
@@ -15,6 +16,7 @@ import static com.codeborne.selenide.Selenide.$x;
 public class HomePage extends BasePage {
     private final String language = LanguageHelper.getLanguage();
 
+    @Getter
     private final LocatorHelper localeBundle = new LocatorHelper(HomePage.class.getSimpleName());
 
     private final String radioReturnFlight = "//img[@src='/static/media/switch.d8860013.svg']/parent::div/preceding-sibling::div//input[@type='radio'and@value='roundTrip']";
@@ -27,6 +29,7 @@ public class HomePage extends BasePage {
     private final String optionAirportName = "//div[@id='panel1a-content']//div[text()='%s']";
     private final String buttonDateAtCalendar = "//div[@class='rdrMonth' and contains(div,'%s')]//span[text()='%s']";
     private final String panelCalendar = "//div[@class='rdrCalendarWrapper rdrDateRangeWrapper']";
+    private final String labelMonthInCalendar = "//div[@rdrMonthName']";
     private final String buttonPrevMonth = "//button[@class='rdrNextPrevButton rdrPprevButton']";
     private final String buttonNextMonth = "//button[@class='rdrNextPrevButton rdrNextButton']";
     private final String dropdownPassenger = "//input[starts-with(@id,'input-base-custom-')]";
@@ -86,29 +89,29 @@ public class HomePage extends BasePage {
     }
 
     public void selectDateInCalendar(String year, String month, String date) {
-        $x(panelCalendar).shouldBe(visible,Duration.ofSeconds(10));
+        $x(panelCalendar).shouldBe(visible,Constants.SHORT_WAIT);
         String strMonthYear = STR."\{month} \{year}";
         String departureDate = String.format(buttonDateAtCalendar, strMonthYear, date);
         $x(departureDate).shouldBe(visible, Constants.SHORT_WAIT);
         $x(departureDate).click();
     }
 
-    public void selectDateInCalendar(Object date) {
+    public void selectDateInCalendar(String date) {
 //        $x(panelCalendar).shouldBe(visible,Duration.ofSeconds(10));
 
-        String tmp_date = FakerUtils.getDate(date);
+        String tmp_date = FakerUtils.parseSelectedDate(date).toString();
+        String month = tmp_date.split(",",0)[1].trim();
 
-        System.out.println(tmp_date);
+        System.out.println(month);
+    }
 
+    public void clickNextMonth(String month){
+        $x(panelCalendar).shouldBe(visible,Duration.ofSeconds(3));
     }
 
     public void clickReturnDateCale() {
         $x(buttonReturnDate).shouldBe(visible, Constants.SHORT_WAIT);
         $x(buttonReturnDate).click();
-    }
-
-    public LocatorHelper getLocaleBundle(){
-        return localeBundle ;
     }
 
 }

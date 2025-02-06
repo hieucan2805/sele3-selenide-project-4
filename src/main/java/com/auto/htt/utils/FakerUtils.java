@@ -6,8 +6,11 @@ import net.datafaker.Faker;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.time.format.FormatStyle;
 import java.time.format.TextStyle;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
@@ -22,6 +25,15 @@ public class FakerUtils {
     public static String sentence() {
         return faker.lorem().sentence();
     }
+
+    private static final List<DateTimeFormatter> DATE_FORMATS = Arrays.asList(
+            DateTimeFormatter.ofPattern("dd-MM-yyyy"),      // 13-02-2025
+            DateTimeFormatter.ofPattern("d-M-yyyy"),        // 3-2-2025
+            DateTimeFormatter.ofPattern("dd/MM/yyyy"),      // 13/02/2025
+            DateTimeFormatter.ofPattern("d/M/yyyy"),        // 3/2/2025
+            DateTimeFormatter.ofPattern("d MMMM yyyy", Locale.ENGLISH), // 13 February 2025
+            DateTimeFormatter.ofPattern("dd, MMMM yyyy", Locale.ENGLISH) // 13, February 2025
+    );
 
     public static double randomDouble(int min, int max) {
         Random r = new Random();
@@ -49,29 +61,38 @@ public class FakerUtils {
         return LocalDate.ofEpochDay(randomDay);
     }
 
-    public static LocalDate getCurrentDate() {
-        return LocalDate.now();
+    private static LocalDate parseWithMultipleFormats(String dateStr) {
+        for (DateTimeFormatter formatter : DATE_FORMATS)
+            try {
+                return LocalDate.parse(dateStr, formatter);
+            } catch (DateTimeParseException ignored) {
+            }
+        throw new IllegalArgumentException("Invalid date format: " + dateStr);
     }
 
-    public static String getFormatedCurrentDate() {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern(Constants.TIME_FORMAT_CURRENT_DATE);
-        LocalDate now = LocalDate.now();
-        return dtf.format(now);
-    }
+    public static String parseSelectedDate(String date) {
+        LocalDate localDate;
 
-    public static String getDate(Object date) {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern(Constants.TIME_FORMAT_CURRENT_DATE);
-        LocalDate tempDate;
+        switch (date.toLowerCase()) {
+            case "today":
+                localDate = LocalDate.now();
+                break;
+            case "tomorrow":
+                localDate = LocalDate.now().plusDays(1);
+                break;
+            case "yesterday":
+                localDate = LocalDate.now().minusDays(1);
+                break;
+            default:
+                localDate = parseWithMultipleFormats(date);
 
-        if (date.equals("tomorrow")) {
-            tempDate = getCurrentDate().plusDays(1);
-        } else if (date.equals("yesterday")) {
-            tempDate = getCurrentDate().minusDays(1);
-        } else {
-            tempDate = getCurrentDate().plusDays((int) date);
+                break;
         }
-        return dtf.format(tempDate);
+        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern(Constants.TIME_FORMAT_CURRENT_DATE);
+        return localDate.format(outputFormatter);
+
     }
+
 
     public static String getCurrentDateTime() {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern(Constants.TIME_FORMAT_CURRENT_DATE_TIME);
