@@ -36,7 +36,7 @@ public class BasePage {
     @Step("Wait And Accept Cookie")
     public void acceptCookie() {
         buttonAcceptCookie.shouldBe(visible, Duration.ofSeconds(5));
-        log.info("Cookie pop-up appears");
+//        log.info("Cookie pop-up appears");
         buttonAcceptCookie.shouldBe(visible).click();
     }
 

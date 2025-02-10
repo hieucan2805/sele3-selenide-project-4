@@ -16,25 +16,28 @@ public class TestCase001 extends BaseTest {
 
     private final HomePage homePage = new HomePage();
 
-    @DataProvider(name = "flightSearchDataProvider")
-    public Object[][] flightSearchDataProvider() {
-        return new Object[][]{
-                {new FlightInfoModel(
-                        "Thành phố Hồ Chí Minh", "Hà Nội",
-                        "Round trip", "tomorrow", "3",
-                        new PassengerModel("2", "0", "0"))}
-        };
-    }
-
-    @Test(dataProvider = "flightSearchDataProvider")
+//    @DataProvider(name = "flightSearchDataProvider")
+//    public Object[][] flightSearchDataProvider() {
+//        return new Object[][]{
+//                {new FlightInfoModel(
+//                        "Thành phố Hồ Chí Minh", "Hà Nội",
+//                        "Round trip", "tomorrow", "3",
+//                        new PassengerModel("2", "0", "0"))}
+//        };
+//    }
+//
+//    @Test(dataProvider = "flightSearchDataProvider")
+    @Test
     public void vietJetTest() {
         homePage.openHomePage();
         homePage.clickTypeOfFlight(TypeFlight.ONE_WAY);
         homePage.inputFromLocation("SGN");
         homePage.clickOptionAirportName("SGN");
         homePage.selectDestinationAirport("HAN");
-//
-//        homePage.clickDepartureDateCalendar();
+
+
+homePage.selectDateInCalendar("tomorrow");
+
 //        homePage.selectDateInCalendar("2025","January", "6");
 //        homePage.selectDateInCalendar("2025","January", "11");
 

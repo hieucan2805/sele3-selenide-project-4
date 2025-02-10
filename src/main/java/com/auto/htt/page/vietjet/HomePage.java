@@ -29,9 +29,10 @@ public class HomePage extends BasePage {
     private final String optionAirportName = "//div[@id='panel1a-content']//div[text()='%s']";
     private final String buttonDateAtCalendar = "//div[@class='rdrMonth' and contains(div,'%s')]//span[text()='%s']";
     private final String panelCalendar = "//div[@class='rdrCalendarWrapper rdrDateRangeWrapper']";
-    private final String labelMonthInCalendar = "//div[@rdrMonthName']";
+    private final String labelMonthInCalendar = "//div[@class='rdrMonthName']";
     private final String buttonPrevMonth = "//button[@class='rdrNextPrevButton rdrPprevButton']";
     private final String buttonNextMonth = "//button[@class='rdrNextPrevButton rdrNextButton']";
+    private final String labelDateInCalendar = "//span[@class='rdrDayNumber' and text()='11']";
     private final String dropdownPassenger = "//input[starts-with(@id,'input-base-custom-')]";
     private final String buttonDecreaseAdult = "//div[div[div[img[@alt='adults']]]]//button[1]";
     private final String buttonIncreaseAdult = "//div[div[div[img[@alt='adults']]]]//button[2]";
@@ -97,17 +98,30 @@ public class HomePage extends BasePage {
     }
 
     public void selectDateInCalendar(String date) {
+//        System.out.println($x(panelCalendar).exists());
 //        $x(panelCalendar).shouldBe(visible,Duration.ofSeconds(10));
 
-        String tmp_date = FakerUtils.parseSelectedDate(date).toString();
+        String tmp_date = FakerUtils.parseSelectedDate(date);
         String month = tmp_date.split(",",0)[1].trim();
 
+        clickNextMonth(month);
         System.out.println(month);
+
+
     }
 
     public void clickNextMonth(String month){
-        $x(panelCalendar).shouldBe(visible,Duration.ofSeconds(3));
+        $x(labelMonthInCalendar).shouldBe(visible,Duration.ofSeconds(3));
+
+        while (!($x(labelMonthInCalendar).getText().trim()).equalsIgnoreCase(month)) {
+            $x(buttonNextMonth).click();
+            $x(labelMonthInCalendar).shouldHave(visible,Duration.ofSeconds(3));
+        }
+
+
     }
+
+
 
     public void clickReturnDateCale() {
         $x(buttonReturnDate).shouldBe(visible, Constants.SHORT_WAIT);
