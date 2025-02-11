@@ -1,14 +1,10 @@
 package com.auto.htt.projects.vietjet;
 
 
-import com.auto.htt.models.FlightInfoModel;
-import com.auto.htt.models.PassengerModel;
-import com.auto.htt.page.vietjet.enums.TypeFlight;
 import com.codeborne.selenide.Selenide;
 import com.auto.htt.page.vietjet.HomePage;
 import com.auto.htt.projects.BaseTest;
 import org.slf4j.LoggerFactory;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class TestCase001 extends BaseTest {
@@ -16,7 +12,7 @@ public class TestCase001 extends BaseTest {
 
     private final HomePage homePage = new HomePage();
 
-//    @DataProvider(name = "flightSearchDataProvider")
+    //    @DataProvider(name = "flightSearchDataProvider")
 //    public Object[][] flightSearchDataProvider() {
 //        return new Object[][]{
 //                {new FlightInfoModel(
@@ -30,20 +26,11 @@ public class TestCase001 extends BaseTest {
     @Test
     public void vietJetTest() {
         homePage.openHomePage();
-        homePage.clickTypeOfFlight(TypeFlight.ONE_WAY);
-        homePage.inputFromLocation("SGN");
-        homePage.clickOptionAirportName("SGN");
-        homePage.selectDestinationAirport("HAN");
+
+//        homePage.searchFlightWithInfo(FlightInfo);
 
 
-homePage.selectDateInCalendar("tomorrow");
 
-//        homePage.selectDateInCalendar("2025","January", "6");
-//        homePage.selectDateInCalendar("2025","January", "11");
-
-
-//        System.out.println(FakerUtils.getFormatedCurrentDate());
-//        System.out.println(FakerUtils.getDate(3));
         Selenide.sleep(5000000);
     }
 }

@@ -10,4 +10,5 @@ public class Constants {
 
     //Time out
     public static final Duration SHORT_WAIT = Duration.ofSeconds(5);
+    public static final Duration VERY_SHORT_WAIT = Duration.ofSeconds(1);
 }
