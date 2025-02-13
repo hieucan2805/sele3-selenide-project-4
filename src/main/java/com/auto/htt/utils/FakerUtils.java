@@ -31,6 +31,7 @@ public class FakerUtils {
             DateTimeFormatter.ofPattern("d-M-yyyy"),        // 3-2-2025
             DateTimeFormatter.ofPattern("dd/MM/yyyy"),      // 13/02/2025
             DateTimeFormatter.ofPattern("d/M/yyyy"),        // 3/2/2025
+            DateTimeFormatter.ofPattern("yyyy-M-dd"),        // 2025-06-22
             DateTimeFormatter.ofPattern("d MMMM yyyy", Locale.ENGLISH), // 13 February 2025
             DateTimeFormatter.ofPattern("dd, MMMM yyyy", Locale.ENGLISH) // 13, February 2025
     );
@@ -71,26 +72,22 @@ public class FakerUtils {
     }
 
     public static String parseSelectedDate(String date) {
-        LocalDate localDate;
+        LocalDate localDate = switch (date.toLowerCase()) {
+            case "today" -> LocalDate.now();
+            case "tomorrow" -> LocalDate.now().plusDays(1);
+            case "yesterday" -> LocalDate.now().minusDays(1);
+            default -> parseWithMultipleFormats(date);
+        };
 
-        switch (date.toLowerCase()) {
-            case "today":
-                localDate = LocalDate.now();
-                break;
-            case "tomorrow":
-                localDate = LocalDate.now().plusDays(1);
-                break;
-            case "yesterday":
-                localDate = LocalDate.now().minusDays(1);
-                break;
-            default:
-                localDate = parseWithMultipleFormats(date);
-
-                break;
-        }
         DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern(Constants.TIME_FORMAT_CURRENT_DATE);
         return localDate.format(outputFormatter);
 
+    }
+
+    public static String getNewDate(String rootDate, String duration){
+        LocalDate newDate;
+        newDate = parseWithMultipleFormats(rootDate).plusDays(Long.parseLong(duration));
+        return parseSelectedDate(String.valueOf(newDate));
     }
 
 

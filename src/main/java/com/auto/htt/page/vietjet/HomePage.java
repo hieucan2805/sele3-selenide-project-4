@@ -2,6 +2,7 @@ package com.auto.htt.page.vietjet;
 
 import com.auto.htt.models.FlightInfoModel;
 import com.auto.htt.models.PassengerModel;
+import com.auto.htt.page.vietjet.enums.Airport;
 import com.auto.htt.page.vietjet.enums.TypeFlight;
 import com.auto.htt.utils.Constants;
 import com.auto.htt.utils.FakerUtils;
@@ -85,11 +86,14 @@ public class HomePage extends BasePage {
 
     @Step("Select the Location")
     public void selectAirport(String from, String to) {
-        inputFromLocation(from);
-        clickOptionAirportName(from);
+        String fromPort = Airport.findByName(from);
+        String toPort = Airport.findByName(to);
 
-        inputDestinationLocation(to);
-        clickOptionAirportName(to);
+        inputFromLocation(fromPort);
+        clickOptionAirportName(fromPort);
+
+        inputDestinationLocation(toPort);
+        clickOptionAirportName(toPort);
     }
 
     public void clickDepartureDateCalendar() {
@@ -120,14 +124,19 @@ public class HomePage extends BasePage {
 
         while (!($x(labelMonthInCalendar).getText().trim()).equalsIgnoreCase(month)) {
             $x(buttonNextMonth).click();
-            $x(labelMonthInCalendar).shouldHave(visible,  Constants.VERY_SHORT_WAIT);
+            $x(labelMonthInCalendar).shouldHave(visible, Constants.VERY_SHORT_WAIT);
         }
     }
 
-    public void selectDepartureDateAndReturnDate(String deptDate, String returnDate){
-
+    public void selectDepartureDateAndReturnDate(String deptDate, String returnDate) {
+        selectDateInCalendar(deptDate);
+        selectDateInCalendar(returnDate);
     }
 
+    public void selectDepartureDateAndDuration(String deptDate, String duration) {
+        selectDateInCalendar(deptDate);
+        selectDateInCalendar(FakerUtils.getNewDate(FakerUtils.parseSelectedDate(deptDate),duration));
+    }
 
     @Step("Select passenger")
     public void selectPassenger(PassengerModel passenger) {
@@ -161,17 +170,19 @@ public class HomePage extends BasePage {
     public void fillFlightInfo(FlightInfoModel flightInfoModel) {
         clickTypeOfFlight(flightInfoModel.getType());
 
-        selectAirport(flightInfoModel.getFrom(),flightInfoModel.getTo());
+        selectAirport(flightInfoModel.getFrom(), flightInfoModel.getTo());
+        if(flightInfoModel.getDuration().isEmpty()){
+            selectDateInCalendar(flightInfoModel.getDepartureDate());
+        }else {
+            selectDepartureDateAndDuration(flightInfoModel.getDepartureDate(),flightInfoModel.getDuration());
+        }
 
-        selectDateInCalendar(flightInfoModel.getDepartureDate());
-        selectDateInCalendar(flightInfoModel.getDuration());
-
-
+        selectPassenger(flightInfoModel.getPassenger());
 
     }
 
     @Step("Search Flight with information")
-    public void searchFlightWithInfo(FlightInfoModel flightInfoModel){
+    public void searchFlightWithInfo(FlightInfoModel flightInfoModel) {
         fillFlightInfo(flightInfoModel);
 
         $x(buttonSearchFlight).click();
