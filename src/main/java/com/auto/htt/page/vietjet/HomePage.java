@@ -11,8 +11,6 @@ import com.auto.htt.utils.LocatorHelper;
 import io.qameta.allure.Step;
 import lombok.Getter;
 
-import java.time.Duration;
-
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
@@ -47,7 +45,8 @@ public class HomePage extends BasePage {
     private final String buttonDecreasePassenger = "//div[div[div[img[@alt='%s']]]]//button[1]";
     private final String labelPassenger = "//div[div[div[img[@alt='%s']]]]//button[1]//following-sibling::span[@weight]";
     private final String buttonIncreasePassenger = "//div[div[div[img[@alt='%s']]]]//button[2]";
-    private final String buttonSearchFlight = "//img[@src='/static/media/switch.d8860013.svg']/parent::div/following-sibling::div//button/span[@class='MuiButton-label']";
+    private final String buttonSpecialAssitanceRequest = "//span[@customcolor='hint']";
+    private final String buttonSearchFlight = "//button[@tabindex='0']//span[text()]/parent::button";
 
     //Actions block
     @Step("Select Type of Flight")
@@ -60,28 +59,27 @@ public class HomePage extends BasePage {
 
     @Step("Select the One Way Flight")
     public void selectOneWayFlight() {
-        $x(radioOneWayFlight).click();
+        $x(radioOneWayFlight).shouldBe(visible, Constants.VERY_SHORT_WAIT).click();
     }
 
     @Step("Select the Return Flight")
     public void selectReturnFlight() {
-        $x(radioReturnFlight).click();
+        $x(radioReturnFlight).shouldBe(visible, Constants.VERY_SHORT_WAIT).click();
     }
 
     public void inputFromLocation(String location) {
-        $x(inputFrom).click();
+        $x(inputFrom).shouldBe(visible, Constants.VERY_SHORT_WAIT).click();
         $x(inputFrom).setValue(location);
     }
 
     public void inputDestinationLocation(String location) {
-        $x(inputDestination).click();
+        $x(inputDestination).shouldBe(visible, Constants.VERY_SHORT_WAIT).click();
         $x(inputDestination).setValue(location);
     }
 
     public void clickOptionAirportName(String airport) {
         String formatedOptionAirportName = String.format(optionAirportName, airport);
-        $x(formatedOptionAirportName).shouldBe(visible, Constants.SHORT_WAIT);
-        $x(formatedOptionAirportName).click();
+        $x(formatedOptionAirportName).shouldBe(visible, Constants.VERY_SHORT_WAIT).click();;
     }
 
     @Step("Select the Location")
@@ -106,13 +104,14 @@ public class HomePage extends BasePage {
         $x(buttonReturnDate).click();
     }
 
+    @Step("Select Date in Calendar")
     public void selectDateInCalendar(String date) {
         String tmp_date = FakerUtils.parseSelectedDate(date);
         String targetMonth = tmp_date.split(",", 0)[1].trim();
         String targetDate = tmp_date.split(",", 0)[0].trim();
         String dateTmpXpath = String.format(labelDateInCalendar, targetMonth, targetDate);
 
-        if (!$x(panelCalendar).isDisplayed())
+        if (!$x(panelCalendar).shouldHave(visible,Constants.VERY_SHORT_WAIT).isDisplayed())
             $x(buttonReturnDate).click();
 
         gotoMonth(targetMonth);
@@ -139,19 +138,19 @@ public class HomePage extends BasePage {
     }
 
     @Step("Select passenger")
-    public void selectPassenger(PassengerModel passenger) {
-        selectPassenger("adults", passenger.getAdults());
-        selectPassenger("children", passenger.getChild());
-        selectPassenger("baby", passenger.getBaby());
+    public void inputPassenger(PassengerModel passenger) {
+        inputPassenger("adults", passenger.getAdults());
+        inputPassenger("children", passenger.getChild());
+        inputPassenger("baby", passenger.getBaby());
     }
 
-    public void selectPassenger(String passenger, String number) {
+    public void inputPassenger(String passenger, String number) {
         String labelXpath = String.format(labelPassenger, passenger);
         String buttonIncreaseXpath = String.format(buttonIncreasePassenger, passenger);
         String buttonDecreaseXpath = String.format(buttonDecreasePassenger, passenger);
         String currentCount = $x(labelXpath).shouldBe(visible, Constants.SHORT_WAIT).getText();
 
-        if (!$x(labelXpath).isDisplayed())
+        if (!$x(buttonSpecialAssitanceRequest).isDisplayed())
             $x(dropdownPassenger).click();
 
         while (Integer.parseInt(currentCount) != Integer.parseInt(number)) {
@@ -163,7 +162,20 @@ public class HomePage extends BasePage {
 
             $x(labelXpath).shouldNotHave(text(currentCount), Constants.VERY_SHORT_WAIT);
             currentCount = $x(labelXpath).getText();
+
+
+
+
         }
+    }
+
+    public void collapsePassengerPanel(){
+        if ($x(buttonSpecialAssitanceRequest).isDisplayed())
+            $x(dropdownPassenger).click();
+    }
+
+    public void clickSearch(){
+        $x(buttonSearchFlight).shouldBe(visible,Constants.VERY_SHORT_WAIT).click();
     }
 
     @Step("Fill information to search")
@@ -177,15 +189,15 @@ public class HomePage extends BasePage {
             selectDepartureDateAndDuration(flightInfoModel.getDepartureDate(),flightInfoModel.getDuration());
         }
 
-        selectPassenger(flightInfoModel.getPassenger());
-
+        inputPassenger(flightInfoModel.getPassenger());
+        collapsePassengerPanel();
     }
 
     @Step("Search Flight with information")
     public void searchFlightWithInfo(FlightInfoModel flightInfoModel) {
         fillFlightInfo(flightInfoModel);
 
-        $x(buttonSearchFlight).click();
+        clickSearch();
     }
 
 

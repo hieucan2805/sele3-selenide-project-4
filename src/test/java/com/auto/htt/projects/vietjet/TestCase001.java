@@ -3,6 +3,7 @@ package com.auto.htt.projects.vietjet;
 
 import com.auto.htt.models.FlightInfoModel;
 import com.auto.htt.models.PassengerModel;
+import com.auto.htt.page.vietjet.SelectFlightPage;
 import com.codeborne.selenide.Selenide;
 import com.auto.htt.page.vietjet.HomePage;
 import com.auto.htt.projects.BaseTest;
@@ -14,6 +15,7 @@ public class TestCase001 extends BaseTest {
     private static final org.slf4j.Logger log = LoggerFactory.getLogger(TestCase001.class);
 
     private final HomePage homePage = new HomePage();
+    private final SelectFlightPage selectFightPage = new SelectFlightPage();
 
         @DataProvider(name = "flightSearchDataProvider")
     public Object[][] flightSearchDataProvider() {
@@ -30,8 +32,10 @@ public class TestCase001 extends BaseTest {
 
         homePage.searchFlightWithInfo(info);
 
-//        homePage.searchFlightWithInfo(info.getDepartureDate(), info.getDuration());
+        selectFightPage.cancelAds();
 
-        Selenide.sleep(5000000);
+        selectFightPage.chooseCheapestTicketAndContinue();
+
+        Selenide.sleep(5000);
     }
 }

@@ -39,8 +39,6 @@ public class BaseTest {
 						.put("isHeadless", String.valueOf(isHeadless()))
 						.build(), System.getProperty("user.dir") + "/allure-results/");
 
-		Selenide.closeWebDriver();
-
 		// Close the browser after each test
 		Selenide.closeWebDriver();
 	}
