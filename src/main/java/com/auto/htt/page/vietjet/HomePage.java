@@ -4,10 +4,7 @@ import com.auto.htt.models.FlightInfoModel;
 import com.auto.htt.models.PassengerModel;
 import com.auto.htt.page.vietjet.enums.Airport;
 import com.auto.htt.page.vietjet.enums.TypeFlight;
-import com.auto.htt.utils.Constants;
-import com.auto.htt.utils.FakerUtils;
-import com.auto.htt.utils.LanguageHelper;
-import com.auto.htt.utils.LocatorHelper;
+import com.auto.htt.utils.*;
 import io.qameta.allure.Step;
 import lombok.Getter;
 
@@ -106,7 +103,7 @@ public class HomePage extends BasePage {
 
     @Step("Select Date in Calendar")
     public void selectDateInCalendar(String date) {
-        String tmp_date = FakerUtils.parseSelectedDate(date);
+        String tmp_date = DateUtils.parseSelectedDate(date);
         String targetMonth = tmp_date.split(",", 0)[1].trim();
         String targetDate = tmp_date.split(",", 0)[0].trim();
         String dateTmpXpath = String.format(labelDateInCalendar, targetMonth, targetDate);
@@ -134,7 +131,7 @@ public class HomePage extends BasePage {
 
     public void selectDepartureDateAndDuration(String deptDate, String duration) {
         selectDateInCalendar(deptDate);
-        selectDateInCalendar(FakerUtils.getNewDate(FakerUtils.parseSelectedDate(deptDate),duration));
+        selectDateInCalendar(DateUtils.getNewDate(DateUtils.parseSelectedDate(deptDate),duration));
     }
 
     @Step("Select passenger")
@@ -162,9 +159,6 @@ public class HomePage extends BasePage {
 
             $x(labelXpath).shouldNotHave(text(currentCount), Constants.VERY_SHORT_WAIT);
             currentCount = $x(labelXpath).getText();
-
-
-
 
         }
     }
