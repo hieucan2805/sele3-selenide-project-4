@@ -8,11 +8,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-@NoArgsConstructor
 public class PassengerModel {
-    private int adults;
-    private int child;
-    private int baby;
+    private String adults;
+    private String child;
+    private String baby;
 
     @Override
     public String toString() {

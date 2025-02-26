@@ -13,8 +13,9 @@
         <maven.compiler.target>21</maven.compiler.target>
         <aspectj.version>1.9.22</aspectj.version>
         <aspectjweaver.version>1.9.22</aspectjweaver.version>
+        <!-- Ensure the compiler uses UTF-8 -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
 
     <dependencies>
@@ -30,13 +31,6 @@
             <groupId>com.codeborne</groupId>
             <artifactId>selenide</artifactId>
             <version>7.6.1</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
-        <dependency>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <version>3.13.0</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.testng/testng -->
@@ -65,20 +59,6 @@
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
             <version>2.24.1</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-classic -->
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>1.5.15</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-core -->
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-core</artifactId>
-            <version>1.5.15</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
@@ -141,18 +121,33 @@
             <version>2.29.1</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/com.epam.reportportal/agent-java-junit5 -->
+        <dependency>
+            <groupId>com.epam.reportportal</groupId>
+            <artifactId>agent-java-junit5</artifactId>
+            <version>5.3.4</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.epam.reportportal/logger-java-logback -->
+        <!-- ReportPortal Logger for Log4j2 -->
+        <dependency>
+            <groupId>com.epam.reportportal</groupId>
+            <artifactId>logger-java-logback</artifactId>
+            <version>5.2.3</version>
+        </dependency>
+
+        <!-- Logback to Log4j2 Bridge -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>log4j-over-slf4j</artifactId>
+            <version>2.0.16</version>
+        </dependency>
+
         <!-- https://mvnrepository.com/artifact/com.github.automatedowl/allure-environment-writer -->
         <dependency>
             <groupId>com.github.automatedowl</groupId>
             <artifactId>allure-environment-writer</artifactId>
             <version>1.0.0</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-remote-driver -->
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-remote-driver</artifactId>
-            <version>4.27.0</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
@@ -179,9 +174,9 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.13.0</version>
                 <configuration>
-                    <release>21</release>
-                    <source>21</source>
-                    <target>21</target>
+                    <release>${maven.compiler.source}</release>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
                     <compilerArgs>--enable-preview</compilerArgs>
                 </configuration>
             </plugin>
@@ -200,6 +195,11 @@
                     <reuseForks>true</reuseForks>
                     <testFailureIgnore>false</testFailureIgnore>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-report-plugin</artifactId>
+                <version>3.0.0-M9</version>
             </plugin>
         </plugins>
     </build>
