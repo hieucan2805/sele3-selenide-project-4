@@ -1,8 +1,7 @@
 package com.auto.htt.page.vietjet;
 
-import com.auto.htt.page.vietjet.enums.TypeFlight;
 import com.auto.htt.utils.Constants;
-import com.auto.htt.utils.LanguageHelper;
+import com.auto.htt.utils.URLHelper;
 import com.auto.htt.utils.LocatorHelper;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
@@ -16,7 +15,7 @@ import static com.codeborne.selenide.Selenide.$$x;
 import static com.codeborne.selenide.Selenide.$x;
 
 public class SelectFlightPage extends BasePage {
-    private final String language = LanguageHelper.getLanguage();
+    private final String language = URLHelper.getLanguage();
 
     @Getter
     private final LocatorHelper localeBundle = new LocatorHelper(SelectFlightPage.class.getSimpleName());

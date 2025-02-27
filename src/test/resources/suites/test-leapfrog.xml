@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Selenide Test Suite">
-    <parameter name="test.suite" value="vietjet"/>
-    <test name="Selenide test with VietJet">
+    <parameter name="test.suite" value="leapfrog"/>
+    <test name="Selenide Content test with LeapFrog">
         <classes>
-            <class name="com.auto.htt.projects.vietjet.TestCase001"/>
+            <class name="com.auto.htt.projects.leapfrog.LF_TestCase001"/>
         </classes>
     </test>
 </suite>

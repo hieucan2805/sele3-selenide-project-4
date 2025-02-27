@@ -1,8 +1,7 @@
 package com.auto.htt.page.vietjet;
 
 import com.auto.htt.utils.Constants;
-import com.auto.htt.utils.LanguageHelper;
-import com.codeborne.selenide.Selenide;
+import com.auto.htt.utils.URLHelper;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.ex.UIAssertionError;
 import io.qameta.allure.Step;
@@ -12,7 +11,6 @@ import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
-import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
 public class BasePage {
     private static final org.slf4j.Logger log = LoggerFactory.getLogger(BasePage.class);
@@ -28,7 +26,7 @@ public class BasePage {
 
     @Step("Navigate to Homepage")
     public void openHomePage() {
-        String URL = LanguageHelper.getLocalizedURL();
+        String URL = URLHelper.getLocalizedURL();
         open(URL);
         log.debug("Navigate to {}", URL);
         acceptCookie();

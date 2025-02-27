@@ -13,7 +13,7 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
 
 public class HomePage extends BasePage {
-    private final String language = LanguageHelper.getLanguage();
+    private final String language = URLHelper.getLanguage();
 
     @Getter
     private final LocatorHelper localeBundle = new LocatorHelper(HomePage.class.getSimpleName());

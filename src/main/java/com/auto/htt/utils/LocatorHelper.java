@@ -6,7 +6,7 @@ import java.util.ResourceBundle;
 public class LocatorHelper {
     private final ResourceBundle localBundle;
 
-    private  final String language = LanguageHelper.getLanguage();
+    private  final String language = URLHelper.getLanguage();
 
     // Initialize by loading the localization files
 
